@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-08/schema#",
+  "$id": "https://cineca-project.eu/schemas/v0.0.1/Biosample.json",
+  "title": "CINECA Data Model Biosample",
+  "description": "CINECA Data Model, biosample (NCIT:C43412)",
+  "type": "object",
+  "properties": {
+    "sampleType": {
+      "type": "object",
+      "description": "sample type (Body fluid or substance NCIT:C13236)",
+      "properties": {
+        "urine": {
+          "type": "boolean",
+          "description": "Have collected urine sample?"
+        },
+        "blood": {
+          "type": "object",
+          "description": "Have collected blood sample?",
+          "properties": {
+            "venousOrArterial": {
+              "type": "boolean",
+              "description": "venous or arterial"
+            },
+            "fastingOrNonFasting": {
+              "type": "boolean",
+              "description": "fasting or non-fasting"
+            }
+          }
+        },
+        "stoold": {
+          "type": "boolean",
+          "description": "Have collected stool sample?"
+        },
+        "saliva": {
+          "type": "boolean",
+          "description": "Have collected saliva sample?"
+        },
+        "other": {
+          "type": "boolean",
+          "description": "Have collected other sample?"
+        }
+      }
+    },
+    "availability": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemablocks.org/schemas/sb-phenopackets/OntologyClass/v1.0.0"
+      },
+      "description": "For each biosample present, is it available/accessible for research? (DUO codes)\n",
+      "examples": [
+        [
+          {
+            "id": "DUO:0000007",
+            "label": "disease specific research"
+          }
+        ]
+      ]
+    },
+    "processingMethod": {
+      "type": "string",
+      "description": "For each biosample present, what was the processing method used? (string or enum?)"
+    },
+    "storageMethod": {
+      "type": "string",
+      "description": "For each biosample present, what is the storage method? (MIABIS codes, Categorical)"
+    }
+  },
+  "required": [
+    "sampleType"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "sampleType": {
+        "urine": true
+      },
+      "availability": {
+        "id": "DUO:0000007",
+        "label": "disease specific research"
+      }
+    }
+  ]
+}

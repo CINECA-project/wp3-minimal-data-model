@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-08/schema#",
+  "$id": "https://cineca-project.eu/schemas/v0.0.1/CohortAttributes.json",
+  "title": "CINECA Data Model Cohort Attributes",
+  "description": "CINECA Data Model Cohort Attributes",
+  "type": "object",
+  "properties": {
+    "objectives": {
+      "type": "string",
+      "description": "What are the aims and objectives of your cohort?"
+    },
+    "timeline": {
+      "type": "string",
+      "description": "What is the timeline for your cohort study?"
+    },
+    "studyDesign": {
+      "type": "string",
+      "description": "study design (eg. longitudinal)\nWhat is the study design for your cohort study?\nMIABIS codes (Categorical)\n"
+    },
+    "populationData": {
+      "type": "object",
+      "description": "population data (Population Group? NCIT:C17005)",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "What location is your cohort's population based in?"
+        },
+        "enrollmentProcedures": {
+          "type": "string",
+          "description": "What is your cohort's criteria of enrollment or recruitment procedures?\ncriteria for enrollment and recruitment procedures\n"
+        },
+        "numberOfParticipants": {
+          "type": "number",
+          "description": "What are the number of participants in your cohort?"
+        }
+      }
+    },
+    "demographicData": {
+      "type": "object",
+      "description": "demographic data (NCIT:C142508)",
+      "properties": {
+        "sexesStudiedInCohort": {
+          "type": "number",
+          "description": "How many of each sex are studied in your cohort?"
+        },
+        "gendersStudiedInCohort": {
+          "type": "number",
+          "description": "How many of each gender are studied in your cohort?"
+        },
+        "ageRange": {
+          "type": "string",
+          "description": "What is the age range of your cohort's participants?"
+        }
+      }
+    }
+  },
+  "required": [
+    "objectives"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "objectives": "Objective of the cohort"
+    }
+  ]
+}

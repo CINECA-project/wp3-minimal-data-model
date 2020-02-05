@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-08/schema#",
+  "$id": "https://cineca-project.eu/schemas/v0.0.1/CinecaDataModel.json",
+  "title": "CINECA Data Model",
+  "description": "CINECA Data Model",
+  "type": "object",
+  "properties": {
+    "cohortAttributes": {
+      "$ref": "./CohortAttributes.json",
+      "description": "basic cohort attributes"
+    },
+    "biosample": {
+      "$ref": "./Biosample.json",
+      "description": "biosample (NCIT:C43412)"
+    },
+    "laboratoryMeasures": {
+      "$ref": "./LaboratoryMeasures.json",
+      "description": "laboratory measures (Laboratory Procedure NCIT:C25294)"
+    },
+    "surveyAdministration": {
+      "$ref": "./SurveyAdministration.json",
+      "description": "survey administration (NCIT:C64252)"
+    },
+    "questionnaire": {
+      "$ref": "./Questionnaire.json",
+      "description": "questionnaire/survey data (NCIT:C17176)"
+    },
+    "researchDataDocuments": {
+      "type": "array",
+      "items": "string",
+      "description": "general research data documents (pdf, ppt, images etc)"
+    },
+    "statistics": {
+      "type": "object",
+      "description": "summary statistics for additional data from federated sources"
+    }
+  },
+  "required": [
+    "questionnaire"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "questionnaire": {
+        "demographic": {
+          "age": 30
+        }
+      }
+    }
+  ]
+}

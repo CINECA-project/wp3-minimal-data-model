@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-08/schema#",
+  "$id": "https://cineca-project.eu/schemas/v0.0.1/SurveyAdministration.json",
+  "title": "CINECA Data Model Survey Administration",
+  "description": "CINECA Data Model, survey administration (NCIT:C64252)",
+  "type": "object",
+  "properties": {
+    "dateAndTimeInfo": {
+      "type": "boolean",
+      "description": "Have you collected the date/time of survey assessments? (are we only collecting boolean, what about actual dates?)\n"
+    },
+    "consentAccessibility": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemablocks.org/schemas/sb-phenopackets/OntologyClass/v1.0.0"
+      },
+      "description": "Is there consent for your survey data to be accessible for research? (DUO codes)\n",
+      "examples": [
+        [
+          {
+            "id": "DUO:0000004",
+            "label": "no restriction"
+          }
+        ]
+      ]
+    },
+    "uniqueIdentifiers": {
+      "type": "boolean",
+      "description": "Are there unique identifiers for subjects/participants?"
+    }
+  },
+  "required": [
+    "dateAndTimeInfo",
+    "consentAccessibility",
+    "uniqueIdentifiers"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "dateAndTimeInfo": true,
+      "consentAccessibility": [
+        {
+          "id": "DUO:0000004",
+          "label": "no restriction"
+        }
+      ],
+      "uniqueIdentifiers": false
+    }
+  ]
+}

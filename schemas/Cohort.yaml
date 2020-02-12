@@ -1,14 +1,16 @@
 "$schema": http://json-schema.org/draft-08/schema#
 "$id": https://cineca-project.eu/schemas/v0.0.1/CinecaDataModel.yaml
-title: CINECA Data Model
-description: CINECA Data Model
+title: CINECA Cohort data
+description: CINECA Cohort data schema
 type: object
 properties:
   cohortAttributes:
     "$ref": ./CohortAttributes.yaml
     description: basic cohort attributes
   biosample:
-    "$ref": ./Biosample.yaml
+    type: array
+    items:
+      "$ref": ./Biosample.yaml
     description: biosample (NCIT:C43412)
   laboratoryMeasures:
     "$ref": ./LaboratoryMeasures.yaml
@@ -16,9 +18,6 @@ properties:
   surveyAdministration:
     "$ref": ./SurveyAdministration.yaml
     description: survey administration (NCIT:C64252)
-  questionnaire:
-    "$ref": ./Questionnaire.yaml
-    description: questionnaire/survey data (NCIT:C17176)
   researchDataDocuments:
     type: array
     items: string
@@ -26,11 +25,12 @@ properties:
   statistics:
     type: object
     description: summary statistics for additional data from federated sources
-
 required:
-  - questionnaire
+  - cohortAttributes
 additionalProperties: false
 examples:
-  - questionnaire:
-      demographic:
-        age: 30
+  - biosample:
+      - sampleType: urine
+        availability:
+          id: DUO:0000007
+          label: disease specific research

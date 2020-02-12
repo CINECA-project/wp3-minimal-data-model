@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-08/schema#",
+  "$id": "https://cineca-project.eu/schemas/v0.0.1/DataRecord.json",
+  "title": "CINECA Data Model DataRecord",
+  "description": "CINECA Data Model, data record",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "value of the record"
+    },
+    "ontology": {
+      "$ref": "https://schemablocks.org/schemas/sb-phenopackets/OntologyClass/v1.0.0",
+      "description": "ontology term"
+    }
+  },
+  "required": [
+    "value"
+  ],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "value": "cold",
+      "ontology": {
+        "id": "DOID:10459",
+        "label": "common cold"
+      }
+    }
+  ]
+}

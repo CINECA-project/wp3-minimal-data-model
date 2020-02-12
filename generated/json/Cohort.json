@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-08/schema#",
   "$id": "https://cineca-project.eu/schemas/v0.0.1/CinecaDataModel.json",
-  "title": "CINECA Data Model",
-  "description": "CINECA Data Model",
+  "title": "CINECA Cohort data",
+  "description": "CINECA Cohort data schema",
   "type": "object",
   "properties": {
     "cohortAttributes": {
@@ -10,7 +10,10 @@
       "description": "basic cohort attributes"
     },
     "biosample": {
-      "$ref": "./Biosample.json",
+      "type": "array",
+      "items": {
+        "$ref": "./Biosample.json"
+      },
       "description": "biosample (NCIT:C43412)"
     },
     "laboratoryMeasures": {
@@ -20,10 +23,6 @@
     "surveyAdministration": {
       "$ref": "./SurveyAdministration.json",
       "description": "survey administration (NCIT:C64252)"
-    },
-    "questionnaire": {
-      "$ref": "./Questionnaire.json",
-      "description": "questionnaire/survey data (NCIT:C17176)"
     },
     "researchDataDocuments": {
       "type": "array",
@@ -36,16 +35,20 @@
     }
   },
   "required": [
-    "questionnaire"
+    "cohortAttributes"
   ],
   "additionalProperties": false,
   "examples": [
     {
-      "questionnaire": {
-        "demographic": {
-          "age": 30
+      "biosample": [
+        {
+          "sampleType": "urine",
+          "availability": {
+            "id": "DUO:0000007",
+            "label": "disease specific research"
+          }
         }
-      }
+      ]
     }
   ]
 }

@@ -5,31 +5,17 @@ description: CINECA Data Model, biosample (NCIT:C43412)
 type: object
 properties:
   sampleType:
-    type: object
+    type: string
     description: sample type (Body fluid or substance NCIT:C13236)
-    properties:
-      urine:
-        type: boolean
-        description: Have collected urine sample?
-      blood:
-        type: object
-        description: Have collected blood sample?
-        properties:
-          venousOrArterial:
-            type: boolean
-            description: venous or arterial
-          fastingOrNonFasting:
-            type: boolean
-            description: fasting or non-fasting
-      stoold:
-        type: boolean
-        description: Have collected stool sample?
-      saliva:
-        type: boolean
-        description: Have collected saliva sample?
-      other:
-        type: boolean
-        description: Have collected other sample?
+    enum:
+      - urine
+      - blood
+      - stoold
+      - saliva
+      - other
+  sampleSubType:
+    type: string
+    description: sample sub type if present (blood venous or arterial, fasting or non-fasting)
   availability:
     type: array
     items:
@@ -45,13 +31,11 @@ properties:
   storageMethod:
     type: string
     description: For each biosample present, what is the storage method? (MIABIS codes, Categorical)
-
 required:
   - sampleType
 additionalProperties: false
 examples:
-  - sampleType:
-      urine: true
+  - sampleType: urine
     availability:
       id: DUO:0000007
       label: disease specific research

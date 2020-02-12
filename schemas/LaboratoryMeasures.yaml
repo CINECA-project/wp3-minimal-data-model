@@ -2,6 +2,64 @@
 "$id": https://cineca-project.eu/schemas/v0.0.1/LaboratoryMeasures.yaml
 title: CINECA Data Model Laboratory Measures
 description: CINECA Data Model, laboratory measures (Laboratory Procedure NCIT:C25294)
+definitions:
+  specimenSource:
+    type: object
+    description: Specimen source site
+    properties:
+      sourceSite:
+        type: string
+        description: From where (specimen source site) have you collected microbial data? (string or enum?)
+      availableDataFormats:
+        type: string
+        description: For each specimen source site, what are the available data formats? (string or enum?)
+  genomic:
+    type: object
+    description: genomics (Molecular Analysis? NCIT:C19770)
+    properties:
+      dataType:
+        type: string
+        description: Have you collected this type of data?
+        enum:
+          - DNA
+          - WGS
+          - WES
+          - sequenceVariants
+          - Epigenetics
+          - Metagenomics
+          - RNAseq
+          - eQTL
+          - other
+      sampleSize:
+        type: number
+        description: For each data type present, what is the sample size?
+        availableDataFormats:
+          type: string
+          description: For each data type present, what are the available data formats? (string or enum?)
+        availability:
+          type: array
+          items:
+            '$ref': https://schemablocks.org/schemas/sb-phenopackets/OntologyClass/v1.0.0
+          description: |
+            For each data type present, is it available/accessible for research? (DUO codes)
+          examples:
+            - - id: DUO:0000007
+                label: disease specific research
+        processingMethod:
+          type: string
+          description: For each data type present, what was the processing method used (eg. sequencer/software)?
+        associatedCellTissueBiosampleType:
+          type: string
+          description: For each data type present, what are the associated cell/tissue/biosample types?  (string or enum?)
+        associatedPhenotype:
+          type: string
+          description: For each data type present, what are the associated phenotype(s)?
+        associatedDisease:
+          type: string
+          description: For each data type present, what are the associated diseases?
+        associatedMedication:
+          type: string
+          description: For each data type present, what are the associated medications?
 type: object
 properties:
   microbiology:
@@ -12,77 +70,15 @@ properties:
         type: boolean
         description: Have you collected microbial data?
       biosampleSource:
-        type: string
-        description: From where (specimen source site) have you collected microbial data? (string or enum?)
-      availableDataFormats:
-        type: string
-        description: For each specimen source site, what are the available data formats? (string or enum?)
-  genomics:
-    type: object
-    description: genomics (Molecular Analysis? NCIT:C19770)
-    properties:
-      dataType:
-        type: object
-        description: Have you collected this type of data?
-        properties:
-          dna:
-            type: boolean
-            description: Have you collected DNA/Genotyping data?
-          wgs:
-            type: boolean
-            description: Have you collected WGS data?
-          wes:
-            type: boolean
-            description: Have you collected WES data?
-          sequenceVariants:
-            type: boolean
-            description: Have you collected dna data?
-          epigenetics:
-            type: boolean
-            description: Have you collected Sequence variants (CNV, SNP arrays) data?
-          metagenomics:
-            type: boolean
-            description: Have you collected Epigenetics data?
-          rnaSeq:
-            type: boolean
-            description: Have you collected Metagenomics data?
-          eqtl:
-            type: boolean
-            description: Have you collected RNAseq/gene expression data?
-          other:
-            type: boolean
-            description: Have you collected eQTL (Cis eQTLs and/or Trans eQTLs) data?
-      sampleSize:
-        type: number
-        description: For each data type present, what is the sample size?
-      availableDataFormats:
-        type: string
-        description: For each data type present, what are the available data formats? (string or enum?)
-      availability:
         type: array
+        description: Specimen source sites and available data format for each
         items:
-          '$ref': https://schemablocks.org/schemas/sb-phenopackets/OntologyClass/v1.0.0
-        description: |
-          For each data type present, is it available/accessible for research? (DUO codes)
-        examples:
-          - - id: DUO:0000007
-              label: disease specific research
-      processingMethod:
-        type: string
-        description: For each data type present, what was the processing method used (eg. sequencer/software)?
-      associatedCellTissueBiosampleType:
-        type: string
-        description: For each data type present, what are the associated cell/tissue/biosample types?  (string or enum?)
-      associatedPhenotype:
-        type: string
-        description: For each data type present, what are the associated phenotype(s)?
-      associatedDisease:
-        type: string
-        description: For each data type present, what are the associated diseases?
-      associatedMedication:
-        type: string
-        description: For each data type present, what are the associated medications?
-
+          $ref: '#/definitions/specimenSource'
+  genomics:
+    type: array
+    description: genomics (Molecular Analysis? NCIT:C19770)
+    items:
+      $ref: '#/definitions/genomic'
 required:
   - microbiology
   - genomics
@@ -91,5 +87,6 @@ examples:
   - microbiology:
       microbialData: false
     genomics:
-      dna: true
+      - dataType: DNA
+        sampleSize: 5000
 

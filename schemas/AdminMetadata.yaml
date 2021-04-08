@@ -1,0 +1,208 @@
+"$schema": http://json-schema.org/2019-09/schema#
+"$id": https://cineca-project.eu/schemas/v0.0.1/AdminMetadata
+title: Cohort admin metadata
+description: Cohort admin metadata, combining IHCC and ***
+type: object
+definitions:
+  ontologyTerm:
+    type: object
+    description: ontology
+    properties:
+      id:
+        type: string
+        description: Ontology ID
+      label:
+        type: string
+        description: Ontology label
+  provider:
+    type: object
+    description: data provider
+    properties:
+      acronym:
+        type: string
+        description: Provider organization acronym
+      name:
+        type: string
+        description: Provider name
+      logo:
+        type: string
+        format: uri
+        description: Provider logo as an URL
+      description:
+        type: string
+        description: Provider description
+      website:
+        type: string
+        format: uri
+        description: URL of the provider website
+      contacts:
+        type: array
+        items:
+          "$ref": '#/definitions/contact'
+        description: Contact details for the provider
+      resources:
+        type: array
+        items:
+          "$ref": '#/definitions/contact' #todo
+        description: Any additional resources
+    required:
+      - name
+      - website
+  contact:
+    type: object
+    description: contact information
+    properties:
+      name:
+        type: string
+        description: Contact name
+      email:
+        type: string
+        format: email
+        description: Contact email
+      orcid:
+        type: string
+        description: Contact ORCID
+      affiliation:
+        type: string
+        description: Affiliation of the contact
+      address:
+        type: string
+        description: Contact official adress
+      role:
+        type: string
+        description: role of the contact (eg. PI/Lead)
+    required:
+      - name
+      - email
+  dataTypes:
+    type: object
+    description: collected data types
+    properties:
+      biospecimens:
+        type: boolean
+        description: Cohort contains biospecimens data
+      environmentalData:
+        type: boolean
+        description: Cohort contains environmental data
+      genomicData:
+        type: boolean
+        description: Cohort contains genomic data
+      phenotypicData:
+        type: boolean
+        description: Cohort contains phenotypic data
+  attachment:
+    type: object
+    description: attachment
+    properties:
+      name:
+        type: string
+        description: Attachment name
+      description:
+        type: string
+        description: Attachment description
+      resource:
+        type: string
+        description: Attachment resource
+      hyperlink:
+        type: string
+        format: uri
+        description: Attachment hyperlink (FTP if available)
+      file:
+        type: string
+        description: Attachment file
+properties:
+  cohortID:
+    type: string
+    description: Unique ID for the cohort
+  cohortName:
+    type: string
+    description: Descriptive name for the cohort
+  description:
+    type: string
+    description: Cohort description
+  acronym:
+    type: string
+    description: Acronym if present
+  website:
+    type: string
+    format: uri
+    description: URL of the cohort website
+  logo:
+    type: string
+    format: uri
+    description: URL pointing to the logo of the cohort
+  type:
+    "$ref": '#/definitions/ontologyTerm'
+    description: Type of the cohort e.g. 'cohort', 'network', …
+  provider:
+    type: string
+    description: Cohort provider
+  license:
+    type: string
+    description: License associated with cohort data usage
+  rights:
+    type: string
+    description: Access rights
+  dataSharing:
+    "$ref": '#/definitions/ontologyTerm'
+    description: Data use conditions in DUO
+  contacts:
+    type: array
+    items:
+      "$ref": '#/definitions/contact'
+    description: Contact points for the cohort
+  investigators:
+    type: array
+    items:
+      "$ref": '#/definitions/contact'
+    description: Scientists contirbuting datasets to the cohort
+  startDate:
+    type: string
+    description: Date at which the cohort project started
+  endDate:
+    type: string
+    description: Date at which the cohort project ended/ending
+  targetEnrollment:
+    type: string
+    description: Targeted enrollemnt
+  totalEnrollment:
+    type: string
+    description: Current enrollment level
+  publications:
+    type: string
+    description: Any associated publications
+  funding:
+    type: string
+    description: Funding sources
+  acknowledgements:
+    type: string
+    description: Acknowledgements
+  supplementaryInformation:
+    type: string
+    description: Any other infromation
+  datasets:
+    type: string
+    description: Associated datasets with the cohort
+  territories:
+    type: array
+    items:
+      "$ref": '#/definitions/ontologyTerm'
+    description: Contries/regions covered in the cohort
+  dataTypes:
+    type: '#/definitions/dataTypes'
+    description: Data types in the cohort
+required:
+  - cohortName
+  - description
+  - website
+  - provider
+  - license
+  - startDate
+  - totalEnrollment
+  - territories
+  - dataTypes
+additionalProperties: false
+examples:
+  - cohortId: abcd123
+    cohortName: abcd_123
+    description: cohort for biobank

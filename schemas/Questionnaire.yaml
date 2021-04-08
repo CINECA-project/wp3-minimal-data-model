@@ -95,14 +95,10 @@ properties:
         type: string
         description: other diseases not caputred above
   symptoms:
-    type: object
+    type: string
     description:  |
       If this data type is present, what are the associated variables from your cohort's survey/questionnaire?
       signs and symptoms (Sign or Symptom NCIT:C100104)
-    properties:
-      circulatoryAndRespiratorySystem:
-        type: string
-        description: circulatory and respiratory systems
   physiologicalMeasurements:
     type: object
     description: |
